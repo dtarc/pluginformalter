@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Contains pluginformalter.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function pluginformalter_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the plugin_formalter module.
+    case 'help.page.pluginformalter':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Provides an annotation Plugin to be used as replacement of hook_form_alter().') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function pluginformalter_form_alter(&$form, \Drupal\Core\Form\FormStateInterface &$form_state, $form_id) {
+  /** @var \Drupal\pluginformalter\Plugin\FormAlterManager $pluginManager */
+  $pluginManager = \Drupal::service('plugin.manager.form_alter');
+  /** @var \Drupal\pluginformalter\Plugin\FormAlterInterface $plugin */
+  foreach ($pluginManager->getInstance(['form_id' => $form_id]) as $plugin) {
+    $plugin->formAlter($form, $form_state, $form_id);
+  }
+}

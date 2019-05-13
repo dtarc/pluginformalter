@@ -1,0 +1,4 @@
+services:
+  plugin.manager.form_alter:
+    class: Drupal\pluginformalter\Plugin\FormAlterManager
+    parent: default_plugin_manager
