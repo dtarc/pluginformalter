@@ -2,6 +2,7 @@
 
 namespace Drupal\pluginformalter\Plugin;
 
+use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -40,7 +41,28 @@ class FormAlterManager extends DefaultPluginManager {
         $plugins[$plugin_id] = $this->createInstance($plugin_id, $options);
       }
     }
+    uasort($plugins, [$this, 'sort']);
     return $plugins;
+  }
+
+  /**
+   * Sort plugins by weight.
+   *
+   * @param \Drupal\Component\Plugin\PluginInspectionInterface $a
+   *   A Form Alter plugin.
+   * @param \Drupal\Component\Plugin\PluginInspectionInterface $b
+   *   A Form Alter plugin.
+   *
+   * @return int
+   *   The sorting result.
+   */
+  protected function sort(PluginInspectionInterface $a, PluginInspectionInterface $b) {
+    $a_definition = $a->getPluginDefinition();
+    $b_definition = $b->getPluginDefinition();
+    if ($a_definition['weight'] == $b_definition['weight']) {
+      return 0;
+    }
+    return ($a_definition['weight'] < $b_definition['weight']) ? -1 : 1;
   }
 
 }

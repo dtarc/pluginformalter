@@ -37,4 +37,11 @@ class FormAlter extends Plugin {
    */
   public $form_id;
 
+  /**
+   * The plugin weight which affects the alterations queue.
+   *
+   * @var int
+   */
+  public $weight = 0;
+
 }
