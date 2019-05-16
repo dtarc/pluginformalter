@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_help().
@@ -26,7 +27,7 @@ function pluginformalter_help($route_name, RouteMatchInterface $route_match) {
 /**
  * Implements hook_form_alter().
  */
-function pluginformalter_form_alter(&$form, \Drupal\Core\Form\FormStateInterface &$form_state, $form_id) {
+function pluginformalter_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
   /** @var \Drupal\pluginformalter\Plugin\FormAlterManager $pluginManager */
   $pluginManager = \Drupal::service('plugin.manager.form_alter');
   /** @var \Drupal\pluginformalter\Plugin\FormAlterInterface $plugin */

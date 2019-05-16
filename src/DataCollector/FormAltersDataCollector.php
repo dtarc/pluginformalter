@@ -2,7 +2,6 @@
 
 namespace Drupal\pluginformalter\DataCollector;
 
-
 use Drupal\Core\Logger\LoggerChannelTrait;
 use Drupal\pluginformalter\Plugin\FormAlterManager;
 use Drupal\webprofiler\DataCollector\FormsDataCollector;
@@ -14,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
  * Class FormAltersDataCollector.
  *
  * @package Drupal\pluginformalter\DataCollector
- * @method  reset()
+ * @method reset()
  */
 class FormAltersDataCollector extends FormsDataCollector {
 
